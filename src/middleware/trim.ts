@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import { PassThrough } from "stream";
 
 export default (req: Request, res: Response, next: NextFunction) => {
   const exceptions = ["password"];
