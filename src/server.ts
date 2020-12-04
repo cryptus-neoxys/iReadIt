@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import { createConnection } from "typeorm";
-import express, { json } from "express";
+import express from "express";
 import morgan from "morgan";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
@@ -19,7 +19,7 @@ app.use(morgan("dev"));
 app.use(trim);
 app.use(cookieParser());
 
-app.get("/", (req, res) => res.send("Hello World"));
+app.get("/", (_, res) => res.send("Hello World"));
 app.use("/api/auth", authRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/subs", subRoutes);
