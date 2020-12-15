@@ -1,7 +1,7 @@
 import Axios from "axios";
 import Head from "next/head";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { GetServerSideProps } from "next";
@@ -37,16 +37,16 @@ export default function Home() {
               <div className="w-full p-2">
                 <div className="flex items-center">
                   <Link href={`/r/${post.subName}`}>
-                    <>
-                      <img
-                        className="w-6 h-6 mr-1 cursor-pointer"
-                        src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?f=y"
-                        alt="avatar"
-                      />
-                      <a className="text-xs font-bold cursor-pointer hover:underline">
-                        {post.subName}
-                      </a>
-                    </>
+                    <img
+                      className="w-6 h-6 mr-1 cursor-pointer"
+                      src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?f=y"
+                      alt="avatar"
+                    />
+                  </Link>
+                  <Link href={`/r/${post.subName}`}>
+                    <a className="text-xs font-bold cursor-pointer hover:underline">
+                      {post.subName}
+                    </a>
                   </Link>
                   <p className="text-xs text-gray-500">
                     <span className="mx-1">•</span>
