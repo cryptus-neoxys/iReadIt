@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import Comment from "../entities/Comments";
+import Comment from "../entities/Comment";
 import Post from "../entities/Post";
 import Sub from "../entities/Sub";
 
