@@ -68,7 +68,7 @@ export default class Post extends Entity {
   }
 
   @Expose() get voteScore(): number {
-    return this.votes.reduce((prev, curr) => prev + (curr.value || 0), 0);
+    return this.votes?.reduce((prev, curr) => prev + (curr.value || 0), 0);
   }
 
   protected userVote: number;
