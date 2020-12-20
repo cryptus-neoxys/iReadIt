@@ -4,6 +4,8 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
+import { useAuthState } from "../context/auth";
+
 import InputGroup from "../components/InputGroup";
 
 export default function Home() {
@@ -13,7 +15,10 @@ export default function Home() {
   const [agreement, setAgreement] = useState(false);
   const [errors, setErrors] = useState<any>({});
 
+  const { authenticated } = useAuthState();
+
   const router = useRouter();
+  if (authenticated) router.push("/");
 
   const submitForm = async (event: FormEvent) => {
     event.preventDefault();
