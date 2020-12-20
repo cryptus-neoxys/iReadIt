@@ -4,6 +4,8 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
+import { useAuthDispatch } from "../context/auth";
+
 import InputGroup from "../components/InputGroup";
 
 export default function Home() {
@@ -11,20 +13,20 @@ export default function Home() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<any>({});
 
+  const dispatch = useAuthDispatch();
+
   const router = useRouter();
 
   const submitForm = async (event: FormEvent) => {
     event.preventDefault();
 
     try {
-      await Axios.post(
-        "/auth/login",
-        {
-          username,
-          password,
-        },
-        { withCredentials: true }
-      );
+      const res = await Axios.post("/auth/login", {
+        username,
+        password,
+      });
+
+      dispatch({ type: "LOGIN", payload: res.data });
 
       router.push("/");
     } catch (err) {
