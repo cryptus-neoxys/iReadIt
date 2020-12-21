@@ -35,9 +35,9 @@
   "scripts": {
     "start": "ts-node src/server.ts",
     "server": "nodemon --exec ts-node src/server.ts --ignore client/",
-    "client": "cd client && yarn start",
+    "client": "cd client && yarn dev",
     "typeorm": "ts-node ./node_modules/typeorm/cli.js",
-    "dev": "concurrently \"npm run server\" \"yarn dev\" --names server,client",
+    "dev": "concurrently \"npm run server\" \"npm run client\" --names server,client",
     "seed": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed"
   }
 }
