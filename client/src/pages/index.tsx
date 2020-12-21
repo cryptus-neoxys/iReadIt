@@ -5,6 +5,7 @@ import useSWR from "swr";
 
 import { Post } from "../types";
 import PostCard from "../components/PostCard";
+import { Fragment } from "react";
 
 dayjs.extend(relativeTime);
 
@@ -12,7 +13,7 @@ export default function Home() {
   const { data: posts } = useSWR("/posts");
 
   return (
-    <div className="pt-12">
+    <Fragment>
       <Head>
         <title>iReadit: The front page of the internet</title>
       </Head>
@@ -26,7 +27,7 @@ export default function Home() {
         {/* SideBar */}
         <div>SideBar</div>
       </div>
-    </div>
+    </Fragment>
   );
 }
 
