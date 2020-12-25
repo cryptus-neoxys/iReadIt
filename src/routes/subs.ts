@@ -3,6 +3,7 @@ import { NextFunction, Request, Response, Router } from "express";
 import multer, { FileFilterCallback } from "multer";
 import { getRepository } from "typeorm";
 import path from "path";
+import fs from "fs";
 
 import Post from "../entities/Post";
 import Sub from "../entities/Sub";
@@ -103,8 +104,22 @@ const upload = multer({
   },
 });
 
-const uploadSubImage = async (_: Request, res: Response) => {
-  return res.json({ success: true });
+const uploadSubImage = async (req: Request, res: Response) => {
+  const sub: Sub = res.locals.sub;
+  try {
+    const type = req.body.type;
+
+    if (type !== "image" && type !== "banner") {
+      fs.unlinkSync(req.file.path);
+      return res.status(400).json({ error: "Invalid type" });
+    }
+
+    await sub.save();
+
+    return res.json(sub);
+  } catch (err) {
+    return res.status(500).json({ error: "Something went wrong" });
+  }
 };
 
 const router = Router();
