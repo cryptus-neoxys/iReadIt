@@ -114,7 +114,21 @@ const uploadSubImage = async (req: Request, res: Response) => {
       return res.status(400).json({ error: "Invalid type" });
     }
 
+    const urn = req.file.filename;
+    let oldImageUrn: string = "";
+    if (type === "image") {
+      oldImageUrn = sub.imageUrn || "";
+      sub.imageUrn = urn;
+    } else if (type === "banner") {
+      oldImageUrn = sub.bannerUrn || "";
+      sub.bannerUrn = urn;
+    }
+
     await sub.save();
+
+    if (oldImageUrn !== "") {
+      fs.unlinkSync(`public/images/${oldImageUrn}`);
+    }
 
     return res.json(sub);
   } catch (err) {
