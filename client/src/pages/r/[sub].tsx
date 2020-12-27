@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { createRef, Fragment, useEffect, useState } from "react";
+import { ChangeEvent, createRef, Fragment, useEffect, useState } from "react";
 import useSWR from "swr";
 import Image from "next/image";
 import classNames from "classnames";
@@ -9,6 +9,8 @@ import { useAuthState } from "../../context/auth";
 
 import PostCard from "../../components/PostCard";
 import { Post, Sub } from "../../types";
+import Axios from "axios";
+import { clearScreenDown } from "readline";
 
 export default function SubPage() {
   // Local State
@@ -38,7 +40,25 @@ export default function SubPage() {
 
     fileInputRef.current.name = type;
     fileInputRef.current.click();
-    // revalidate();
+  };
+
+  const uploadImage = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files[0];
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("type", fileInputRef.current.name);
+
+    try {
+      await Axios.post<Sub>(`/subs/${sub.name}/image`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      revalidate();
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   if (error) router.push("/");
@@ -65,7 +85,12 @@ export default function SubPage() {
       </Head>
       {sub && (
         <Fragment>
-          <input type="file" hidden={true} ref={fileInputRef} />
+          <input
+            type="file"
+            hidden={true}
+            ref={fileInputRef}
+            onChange={uploadImage}
+          />
           {/* Sub info and Images */}
           <div className="">
             {/* Banner Image */}
