@@ -1,4 +1,6 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
+import { Fragment } from "react";
 import useSWR from "swr";
 
 import PostCard from "../../components/PostCard";
@@ -28,5 +30,21 @@ export default function Sub() {
     );
   }
 
-  return <div className="container flex pt-5">{postMarkup}</div>;
+  return (
+    <div>
+      <Head>
+        <title>{sub?.title}</title>
+      </Head>
+      {sub && (
+        <Fragment>
+          {/* Sub info and Images */}
+          <div className="">
+            <div className="bg-blue-500"></div>
+          </div>
+          {/* Posts and sidebar */}
+          <div className="container flex pt-5">{postMarkup}</div>
+        </Fragment>
+      )}
+    </div>
+  );
 }
