@@ -10,7 +10,6 @@ import { useAuthState } from "../../context/auth";
 import PostCard from "../../components/PostCard";
 import { Post, Sub } from "../../types";
 import Axios from "axios";
-import { clearScreenDown } from "readline";
 
 export default function SubPage() {
   // Local State
