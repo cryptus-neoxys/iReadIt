@@ -34,4 +34,5 @@ export interface Sub {
   // virtual fields
   imageUrl: string;
   bannerUrl: string;
+  postCount?: number;
 }
