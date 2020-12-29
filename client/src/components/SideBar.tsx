@@ -1,6 +1,11 @@
+import dayjs from "dayjs";
+
 import { Sub } from "../types";
+import { useAuthState } from "../context/auth";
+import Link from "next/link";
 
 export default function SideBar({ sub }: { sub: Sub }) {
+  const { authenticated } = useAuthState();
   return (
     <div className="ml-6 w-80">
       <div className="bg-white rounded">
@@ -19,6 +24,15 @@ export default function SideBar({ sub }: { sub: Sub }) {
               <p>Online</p>
             </div>
           </div>
+          <p className="my-3">
+            <i className="mr-2 fas fa-birthday-cake"></i>
+            Created {dayjs(sub.createdAt).format("D MMM YYYY")}
+          </p>
+          {authenticated && (
+            <Link href={`/r/${sub.name}/submit`}>
+              <a className="w-full py-1 text-sm blue button">Create Post</a>
+            </Link>
+          )}
         </div>
       </div>
     </div>
