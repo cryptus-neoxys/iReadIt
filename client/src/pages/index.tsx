@@ -3,10 +3,10 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import useSWR from "swr";
 import Image from "next/image";
+import { Fragment } from "react";
 
 import { Post, Sub } from "../types";
 import PostCard from "../components/PostCard";
-import { Fragment } from "react";
 import Link from "next/link";
 
 dayjs.extend(relativeTime);
