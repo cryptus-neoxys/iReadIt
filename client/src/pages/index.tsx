@@ -52,7 +52,7 @@ export default function Home() {
                   </div>
                   <Link href={`/r/${sub.name}`}>
                     <a className="font-bold hover:cursor-pointer">
-                      /r/${sub.name}
+                      /r/{sub.name}
                     </a>
                   </Link>
                   <p className="ml-auto font-medium">{sub.postCount}</p>
