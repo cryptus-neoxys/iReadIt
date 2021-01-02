@@ -6,11 +6,11 @@ import Image from "next/image";
 import classNames from "classnames";
 import Axios from "axios";
 
-import { useAuthState } from "../../context/auth";
+import { useAuthState } from "../../../context/auth";
 
-import PostCard from "../../components/PostCard";
-import { Post, Sub } from "../../types";
-import SideBar from "../../components/SideBar";
+import PostCard from "../../../components/PostCard";
+import { Post, Sub } from "../../../types";
+import SideBar from "../../../components/SideBar";
 
 export default function SubPage() {
   // Local State
